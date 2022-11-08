@@ -1,0 +1,26 @@
+[
+  {
+    "file": "masterData.xlxs",
+    "sheets": [
+      {
+        "sheetName": "data1",
+        "columns": [
+          {
+            "columnName": "ID",
+            "dataType": "Number",
+            "default": 0,
+            "required": true,
+            "config": {
+              "maxSize": 250,
+              "minSize": 1,
+              "trim": true,
+              "maxValue": 9999,
+              "minValue": 0,
+              "negativeFriendly": false
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,60 @@
+<h1>ETL Data Source Configuration Form</h1>
+<form class="mt-6" [formGroup]="configurationForm" (ngSubmit)="onSubmit()">
+  <div class="grid">
+    <div class="col">
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText formControlName="fileName">
+        <label for="float-input">File Name</label>
+      </span>
+    </div>
+  </div>
+  <div class="my-3" formArrayName="sheets">
+    <div *ngFor="let sheet of getSheets().controls; let sheetIndex = index">
+      <div [formGroupName]="sheetIndex">
+        <div class="grid">
+          <div class="col-8">
+            <h2>Sheet {{sheetIndex + 1}}</h2>
+            <span class="p-float-label mt-5">
+              <input id="float-input" type="text" pInputText formControlName="sheetName">
+              <label for="float-input">Sheet Name</label>
+            </span>
+          </div>
+          <div class="col-4 flex align-items-end justify-content-around">
+            <button pButton pRipple type="button" label="Remove Sheet" class="p-button-danger"
+              (click)="removeSheet(sheetIndex)"></button>
+            <p-button label="Add Column Sheet" (onClick)="addColumn(sheetIndex)"></p-button>
+          </div>
+        </div>
+        <div formArrayName="columns">
+          <div *ngFor="let column of getColumns(sheetIndex).controls; let columnIndex = index">
+            <div [formGroupName]="columnIndex">
+              <div class="grid px-4">
+                <div class="col-8">
+                  <h3>Sheet {{sheetIndex + 1}} - Column {{columnIndex + 1}}</h3>
+                  <span class="p-float-label mt-5">
+                    <input id="float-input" type="text" pInputText formControlName="columnName">
+                    <label for="float-input">Column Name</label>
+                  </span>
+                </div>
+                <div class="col-4 flex align-items-end justify-content-around">
+                  <button pButton pRipple type="button" label="Remove Column" class="p-button-danger"
+                    (click)="removeColumn(sheetIndex, columnIndex)"></button>
+                  <p-button label="Add Column Config"></p-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <p-button label="Add Sheet" (onClick)="addSheet()"></p-button>
+</form>
+
+
+
+<p>{{configurationForm.value | json }}</p>
+<!-- <select>
+  <option *ngFor="let dataType of dataTypes; index as i" [value]="dataType.dataType"> {{dataType.label}} </option>
+</select> -->

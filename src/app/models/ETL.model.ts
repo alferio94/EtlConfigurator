@@ -1,0 +1,3 @@
+interface ETL {
+  excelFile: excelFile;
+}
